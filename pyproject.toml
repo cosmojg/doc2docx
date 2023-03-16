@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "docx2pdf"
-version = "0.1.8"
-description = "Convert docx to pdf on Windows or macOS directly using Microsoft Word (must be installed)."
+name = "doc2docx"
+version = "0.2.0"
+description = "Convert doc to docx on Windows or macOS directly using Microsoft Word (must be installed)."
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/AlJohri/docx2pdf"
-repository = "https://github.com/AlJohri/docx2pdf"
-authors = ["Al Johri <al.johri@gmail.com>"]
+homepage = "https://github.com/cosmojg/doc2docx"
+repository = "https://github.com/cosmojg/doc2docx"
+authors = ["Cosmo J. Guerini <cosmo@cosmo.red>"]
 classifiers = [
 	"Operating System :: MacOS",
 	"Environment :: MacOS X",
@@ -20,14 +20,14 @@ classifiers = [
 python = ">= 3.5"
 pywin32 = {version = ">= 227", platform = "win32"}
 tqdm = ">= 4.41.0"
-importlib_metadata = {version = ">= 1.3.0", python = "< 3.8"}
+importlib_metadata = {version = ">= 1.3.0", python = "< 3.12"}
 appscript = {version = ">= 1.1.0", platform = "darwin"}
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
+pytest = ">= 5.2"
 
 [tool.poetry.scripts]
-docx2pdf = 'docx2pdf:cli'
+doc2docx = 'doc2docx:cli'
 
 [build-system]
 requires = ["poetry>=0.12"]

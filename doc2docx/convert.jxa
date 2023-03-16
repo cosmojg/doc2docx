@@ -1,7 +1,7 @@
 #!/usr/bin/osascript -l JavaScript
 
 /*
-Usage: ./convert-docx-to-pdf.jxa <INPUT_PATH> <OUTPUT_PATH>
+Usage: ./convert-doc-to-docx.jxa <INPUT_PATH> <OUTPUT_PATH>
 
 Word Object Model: https://docs.microsoft.com/en-us/office/vba/api/overview/word/object-model
 */
@@ -84,18 +84,18 @@ function parseArgs([inputPath, outputPath, keepActive, ...rest]) {
     output = { batch: true, inputPath, outputPath, keepActive };
   } else {
     assert(
-      inputPath.endsWith(".docx"),
-      `inputPath is a file, but it does not end with docx. can only convert docx. inputPath: ${inputPath}`
+      inputPath.endsWith(".doc"),
+      `inputPath is a file, but it does not end with doc. can only convert doc. inputPath: ${inputPath}`
     );
-    if (outputPath.endsWith(".docx")) {
-      outputPath = outputPath.replace(".docx", ".pdf");
+    if (outputPath.endsWith(".doc")) {
+      outputPath = outputPath.replace(".doc", ".docx");
     }
     if (isDir(outputPath)) {
-      outputPath += "/" + basename(inputPath, ".docx") + ".pdf";
+      outputPath += "/" + basename(inputPath, ".doc") + ".docx";
     }
     assert(
-      outputPath.endsWith(".pdf"),
-      `outputPath does not end with .pdf, outputPath directory may not exist. outputPath: ${outputPath}`
+      outputPath.endsWith(".docx"),
+      `outputPath does not end with .docx, outputPath directory may not exist. outputPath: ${outputPath}`
     );
     output = { batch: false, inputPath, outputPath, keepActive };
   }
@@ -125,20 +125,20 @@ function run(args) {
       .diskItems.name()
       .sort();
     for (file of files) {
-      if (!file.endsWith(".docx")) continue;
+      if (!file.endsWith(".doc")) continue;
       const filepath = Path(`${args.inputPath}/${file}`);
       console.log(`converting ${filepath}`);
       word.open(filepath);
       const doc = word.activeDocument;
       const outputFilePath =
-        args.outputPath + "/" + file.replace(".docx", ".pdf");
+        args.outputPath + "/" + file.replace(".doc", ".docx");
       try {
-        doc.saveAs({ fileName: outputFilePath, fileFormat: "format PDF" });
+        doc.saveAs({ fileName: outputFilePath, fileFormat: "format document" });
         console.log(
           JSON.stringify({
             input: filepath.toString(),
             output: outputFilePath,
-            result: "success"
+            result: "success",
           })
         );
       } catch (e) {
@@ -148,7 +148,7 @@ function run(args) {
             input: filepath.toString(),
             output: outputFilePath,
             result: "error",
-            error: e.toString()
+            error: e.toString(),
           })
         );
         console.log(`Failed to save ${outputFilePath}`);
@@ -162,12 +162,12 @@ function run(args) {
     word.open(args.inputPath);
     const doc = word.activeDocument;
     try {
-      doc.saveAs({ fileName: args.outputPath, fileFormat: "format PDF" });
+      doc.saveAs({ fileName: args.outputPath, fileFormat: "format document" });
       console.log(
         JSON.stringify({
           input: args.inputPath.toString(),
           output: args.outputPath,
-          result: "success"
+          result: "success",
         })
       );
     } catch (e) {
@@ -177,7 +177,7 @@ function run(args) {
           input: args.inputPath.toString(),
           output: args.outputPath,
           result: "error",
-          error: e.toString()
+          error: e.toString(),
         })
       );
       console.log(`Failed to save ${args.outputPath}`);

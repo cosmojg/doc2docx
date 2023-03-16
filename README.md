@@ -1,8 +1,8 @@
-# docx2pdf
+# doc2docx
 
-[![PyPI](https://img.shields.io/pypi/v/docx2pdf)](https://pypi.org/project/docx2pdf/)
+[![PyPI](https://img.shields.io/pypi/v/doc2docx)](https://pypi.org/project/doc2docx/)
 
-Convert `docx` to `pdf` on Windows or macOS directly using Microsoft Word (**must be installed**).
+Convert `doc` to `docx` on Windows or macOS directly using Microsoft Word (**must be installed**).
 
 On Windows, this is implemented via [`win32com`](https://pypi.org/project/pywin32/) while on macOS this is implemented via [JXA](https://github.com/JXA-Cookbook/JXA-Cookbook) (Javascript for Automation, aka AppleScript in JS).
 
@@ -11,42 +11,42 @@ On Windows, this is implemented via [`win32com`](https://pypi.org/project/pywin3
 On macOS:
 
 ```
-brew install aljohri/-/docx2pdf
+brew install cosmojg/-/doc2docx
 ```
 
 Via [pipx](https://pipxproject.github.io/pipx/):
 
 ```
-pipx install docx2pdf
+pipx install doc2docx
 ```
 
 Via pip:
 
 ```
-pip install docx2pdf
+pip install doc2docx
 ```
 
 ## CLI
 
 ```
-usage: docx2pdf [-h] [--keep-active] [--version] input [output]
+usage: doc2docx [-h] [--keep-active] [--version] input [output]
 
 Example Usage:
 
-Convert single docx file in-place from myfile.docx to myfile.pdf:
-    docx2pdf myfile.docx
+Convert single doc file in-place from myfile.doc to myfile.docx:
+    doc2docx myfile.doc
 
-Batch convert docx folder in-place. Output PDFs will go in the same folder:
-    docx2pdf myfolder/
+Batch convert doc folder in-place. Output docx files will go in the same folder:
+    doc2docx myfolder/
 
-Convert single docx file with explicit output filepath:
-    docx2pdf input.docx output.pdf
+Convert single doc file with explicit output filepath:
+    doc2docx input.doc output.docx
 
-Convert single docx file and output to a different explicit folder:
-    docx2pdf input.docx output_dir/
+Convert single doc file and output to a different explicit folder:
+    doc2docx input.doc output_dir/
 
-Batch convert docx folder. Output PDFs will go to a different explicit folder:
-    docx2pdf input_dir/ output_dir/
+Batch convert doc folder. Output docx files will go to a different explicit folder:
+    doc2docx input_dir/ output_dir/
 
 positional arguments:
   input          input file or folder. batch converts entire folder or convert
@@ -62,14 +62,14 @@ optional arguments:
 ## Library
 
 ```python
-from docx2pdf import convert
+from doc2docx import convert
 
-convert("input.docx")
-convert("input.docx", "output.pdf")
-convert("my_docx_folder/")
+convert("input.doc")
+convert("input.doc", "output.docx")
+convert("my_doc_folder/")
 ```
 
-See CLI docs above (or in `docx2pdf --help`) for all the different invocations. It is the same for the CLI and python library.
+See CLI docs above (or in `doc2docx --help`) for all the different invocations. It is the same for the CLI and python library.
 
 ## Jupyter Notebook
 
@@ -78,4 +78,9 @@ If you are using this in the context of jupyter notebook, you will need `ipywidg
 ```
 pip install ipywidgets
 jupyter nbextension enable --py widgetsnbextension
-``
+```
+
+## Acknowledgements
+
+Many thanks to [@AlJohri](https://github.com/AlJohri) for the excellent
+[docx2pdf](https://github.com/AlJohri/docx2pdf) upon which this is based!
