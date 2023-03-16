@@ -1,7 +1,8 @@
-import sys
 import json
 import subprocess
+import sys
 from pathlib import Path
+
 from tqdm.auto import tqdm
 
 try:
@@ -21,7 +22,7 @@ def windows(paths, keep_active):
 
     if paths["batch"]:
         for doc_filepath in tqdm(sorted(Path(paths["input"]).glob("[!~]*.doc*"))):
-            docx_filepath = Path(paths["output"]) / (str(doc_filepath.stem) + ".docx")
+            docx_filepath = Path(paths["output"]) / f"{str(doc_filepath.stem)}.docx"
             doc = word.Documents.Open(str(doc_filepath))
             doc.SaveAs(str(docx_filepath), FileFormat=wdFormatDocumentDefault)
             doc.Close(0)
@@ -83,18 +84,17 @@ def resolve_paths(input_path, output_path):
             assert output_path.is_dir()
         else:
             output_path = str(input_path)
-        output["output"] = output_path
     else:
         output["batch"] = False
         assert str(input_path).endswith((".doc", ".DOC"))
         output["input"] = str(input_path)
         if output_path and output_path.is_dir():
-            output_path = str(output_path / (str(input_path.stem) + ".docx"))
+            output_path = str(output_path / f"{str(input_path.stem)}.docx")
         elif output_path:
             assert str(output_path).endswith(".docx")
         else:
-            output_path = str(input_path.parent / (str(input_path.stem) + ".docx"))
-        output["output"] = output_path
+            output_path = str(input_path.parent / f"{str(input_path.stem)}.docx")
+    output["output"] = output_path
     return output
 
 
@@ -106,13 +106,13 @@ def convert(input_path, output_path=None, keep_active=False):
         return windows(paths, keep_active)
     else:
         raise NotImplementedError(
-            "doc2docx is not implemented for linux as it requires Microsoft Word to be installed"
+            "doc2docx is not implemented for linux as it requires Microsoft Word to be installed",
         )
 
 
 def cli():
-    import textwrap
     import argparse
+    import textwrap
 
     if "--version" in sys.argv:
         print(__version__)
@@ -136,14 +136,15 @@ def cli():
 
     Batch convert doc folder. Output docx files will go to a different explicit folder:
         doc2docx input_dir/ output_dir/
-    """
+    """,
     )
 
-    formatter_class = lambda prog: argparse.RawDescriptionHelpFormatter(
-        prog, max_help_position=32
-    )
+    def formatter_class(prog):
+        return argparse.RawDescriptionHelpFormatter(prog, max_help_position=32)
+
     parser = argparse.ArgumentParser(
-        description=description, formatter_class=formatter_class
+        description=description,
+        formatter_class=formatter_class,
     )
     parser.add_argument(
         "input",
@@ -157,7 +158,10 @@ def cli():
         help="prevent closing word after conversion",
     )
     parser.add_argument(
-        "--version", action="store_true", default=False, help="display version and exit"
+        "--version",
+        action="store_true",
+        default=False,
+        help="display version and exit",
     )
 
     if len(sys.argv) == 1:
