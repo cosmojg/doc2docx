@@ -1,0 +1,68 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+-  repo: https://github.com/pre-commit/pre-commit-hooks
+   rev: v4.4.0
+   hooks:
+     -  id: check-added-large-files # prevents giant files from being committed
+        args: ["--enforce-all"]
+     -  id: check-ast # simply checks whether the files parse as valid python
+     -  id: check-builtin-literals # requires literal syntax when initializing empty or zero python builtin types
+     -  id: check-case-conflict # checks for files that would conflict in case-insensitive filesystems
+     -  id: check-docstring-first # checks a common error of defining a docstring after code
+     -  id: check-executables-have-shebangs # ensures that (non-binary) executables have a shebang
+     -  id: check-json # checks json files for parseable syntax
+     -  id: check-shebang-scripts-are-executable # ensures that (non-binary) files with a shebang are executable
+     -  id: pretty-format-json # sets a standard for formatting json files
+        args: ["--autofix", "--indent"]
+     -  id: check-merge-conflict # checks for files that contain merge conflict strings
+     -  id: check-symlinks # checks for symlinks which do not point to anything
+     -  id: check-toml # checks toml files for parseable syntax
+     -  id: check-vcs-permalinks # ensures that links to vcs websites are permalinks
+     -  id: check-xml # checks xml files for parseable syntax
+     -  id: check-yaml # checks yaml files for parseable syntax
+     -  id: debug-statements # checks for debugger imports and py37+ `breakpoint()` calls in python source
+     -  id: destroyed-symlinks # detects symlinks which are changed to regular files with a content of a path which that symlink was pointing to
+     -  id: detect-private-key # detects the presence of private keys
+     -  id: end-of-file-fixer # ensures that a file is either empty, or ends with one newline
+     -  id: fix-byte-order-marker # removes utf-8 byte order marker
+     -  id: fix-encoding-pragma # removes "# -*- coding: utf-8 -*-" from the top of python files
+        args: ["--remove"]
+     -  id: forbid-submodules # forbids any submodules in the repository
+     -  id: mixed-line-ending # replaces or checks mixed line ending
+     -  id: name-tests-test # verifies that test files are named correctly
+        args: ["--pytest-test-first"]
+     -  id: requirements-txt-fixer # sorts entries in requirements.txt
+     -  id: trailing-whitespace # trims trailing whitespace
+        args: ["--markdown-linebreak-ext=md"]
+
+-  repo: https://github.com/psf/black
+   rev: 23.1.0
+   hooks:
+     -  id: black
+     -  id: black-jupyter
+
+-  repo: https://github.com/charliermarsh/ruff-pre-commit
+   rev: v0.0.256
+   hooks:
+     -  id: ruff
+        args: ["--fix-only"]
+
+-  repo: https://github.com/executablebooks/mdformat
+   rev: 0.7.16
+   hooks:
+     -  id: mdformat
+        args: ["--number"]
+
+-  repo: https://github.com/abravalheri/validate-pyproject
+   rev: v0.12.1
+   hooks:
+     -  id: validate-pyproject
+
+-  repo: https://github.com/python-poetry/poetry
+   rev: 1.4.0
+   hooks:
+     - id: poetry-check
+     - id: poetry-lock
+     - id: poetry-export
+       args: ["-f", "requirements.txt", "-o", "requirements.txt"]

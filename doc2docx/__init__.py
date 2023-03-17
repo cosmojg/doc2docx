@@ -1,15 +1,10 @@
 import json
 import subprocess
 import sys
+from importlib.metadata import version
 from pathlib import Path
 
 from tqdm.auto import tqdm
-
-try:
-    # 3.8+
-    from importlib.metadata import version
-except ImportError:
-    from importlib_metadata import version
 
 __version__ = version(__package__)
 
@@ -106,7 +101,10 @@ def convert(input_path, output_path=None, keep_active=False):
         return windows(paths, keep_active)
     else:
         raise NotImplementedError(
-            "doc2docx is not implemented for linux as it requires Microsoft Word to be installed",
+            (
+                "doc2docx is not implemented for linux as it requires Microsoft Word to"
+                " be installed"
+            ),
         )
 
 
@@ -148,7 +146,9 @@ def cli():
     )
     parser.add_argument(
         "input",
-        help="input file or folder. batch converts entire folder or convert single file",
+        help=(
+            "input file or folder. batch converts entire folder or convert single file"
+        ),
     )
     parser.add_argument("output", nargs="?", help="output file or folder")
     parser.add_argument(

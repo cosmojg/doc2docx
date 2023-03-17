@@ -1,0 +1,7 @@
+appscript
+colorama
+importlib-metadata
+lxml
+pywin32
+tqdm
+zipp
