@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "doc2docx"
-version = "0.2.0"
+version = "0.2.1"
 description = "Convert doc to docx on Windows or macOS directly using Microsoft Word (must be installed)."
 authors = ["Cosmo <cosmo@cosmo.red>"]
 readme = "README.md"
