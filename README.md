@@ -11,7 +11,7 @@ On Windows, this is implemented via [`win32com`](https://pypi.org/project/pywin3
 On macOS:
 
 ```
-brew install cosmojg/-/doc2docx
+brew install cosmojg/tap/doc2docx
 ```
 
 Via [pipx](https://pipxproject.github.io/pipx/):
