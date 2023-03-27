@@ -8,7 +8,7 @@ On Windows, this is implemented via [`win32com`](https://pypi.org/project/pywin3
 
 ## Install
 
-On macOS:
+Via brew:
 
 ```
 brew install cosmojg/tap/doc2docx
