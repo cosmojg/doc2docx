@@ -1,5 +1,5 @@
 appscript==1.2.2 ; python_version >= "3.9" and python_version < "4.0" and sys_platform == "darwin"
 colorama==0.4.6 ; python_version >= "3.9" and python_version < "4.0" and platform_system == "Windows"
 lxml==4.9.2 ; python_version >= "3.9" and python_version < "4.0" and sys_platform == "darwin"
-pywin32==305 ; python_version >= "3.9" and python_version < "4.0" and sys_platform == "win32"
+pywin32>=305 ; python_version >= "3.9" and python_version < "4.0" and sys_platform == "win32"
 tqdm==4.65.0 ; python_version >= "3.9" and python_version < "4.0"
